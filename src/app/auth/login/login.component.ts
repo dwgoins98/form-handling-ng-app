@@ -6,17 +6,21 @@ import { FormsModule, NgForm } from '@angular/forms';
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   // Template Driven approach
 
   onSubmit(formData: NgForm) {
+    if (formData.form.invalid) {
+      return;
+    }
 
     const eneteredEmail: string = formData.value.email;
     const enteredPassword: string = formData.value.password;
 
-    console.log("Email: " + eneteredEmail);
-    console.log("Password: " + enteredPassword);
+    console.log(formData.form);
+    console.log('Email: ' + eneteredEmail);
+    console.log('Password: ' + enteredPassword);
   }
 }

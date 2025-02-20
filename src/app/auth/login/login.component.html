@@ -1,18 +1,26 @@
 <!-- Template driven approach -->
 <!-- <form #formTemplateVar="ngForm" (ngSubmit)="onSubmit(formTemplateVar)"> Template variable to access the form in the component -->
-<form #formTemplateVar="ngForm" (ngSubmit)="onSubmit(formTemplateVar)"> <!-- Template variable to access the form in the component -->
+<form #formTemplateVar="ngForm" (ngSubmit)="onSubmit(formTemplateVar)">
+  <!-- Template variable to access the form in the component -->
 
   <h2>Login</h2>
 
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <input type="email" id="email" ngModel name="email" />
+      <input type="email" id="email" ngModel name="email" required email />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input type="password" id="password" ngModel name="password" />
+      <input
+        type="password"
+        id="password"
+        ngModel
+        name="password"
+        required
+        minlength="6"
+      />
     </div>
 
     <button class="button">Login</button>
