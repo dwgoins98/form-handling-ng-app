@@ -8,7 +8,15 @@
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <input type="email" id="email" ngModel name="email" required email />
+      <input
+        type="email"
+        id="email"
+        ngModel
+        name="email"
+        required
+        email
+        #emailControl="ngModel"
+      />
     </div>
 
     <div class="control no-margin">
@@ -20,9 +28,14 @@
         name="password"
         required
         minlength="6"
+        #passwordControl="ngModel"
       />
     </div>
 
     <button class="button">Login</button>
   </div>
+
+  @if (emailControl.touched && passwordControl.touched && !formTemplateVar.valid) {
+  <p class="control-error">Invalid values detected. Please check your input!</p>
+  }
 </form>
