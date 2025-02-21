@@ -1,49 +1,17 @@
-<!-- Template driven approach -->
-<!-- <form #formTemplateVar="ngForm" (ngSubmit)="onSubmit(formTemplateVar)"> Template variable to access the form in the component -->
-<form #formTemplateVar="ngForm" (ngSubmit)="onSubmit(formTemplateVar)">
-  <!-- Template variable to access the form in the component -->
-
+<form>
   <h2>Login</h2>
 
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        ngModel
-        name="email"
-        required
-        email
-        #emailControl="ngModel"
-      />
+      <input type="email" name="email" id="email" />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        ngModel
-        name="password"
-        required
-        minlength="6"
-        #passwordControl="ngModel"
-      />
+      <input type="password" name="password" id="password" />
     </div>
 
     <button class="button">Login</button>
   </div>
-
-  @if (emailControl.touched && emailControl.dirty && emailControl.invalid) {
-  <p class="control-error">
-    Email address doesn't look right. Please double check it's correct
-  </p>
-  } @if (passwordControl.touched && passwordControl.dirty &&
-  passwordControl.invalid) {
-  <p class="control-error">
-    Password not strong enough. Please try another that is at least 6 characters
-    long
-  </p>
-  }
 </form>
