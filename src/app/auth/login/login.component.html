@@ -35,7 +35,15 @@
     <button class="button">Login</button>
   </div>
 
-  @if (emailControl.touched && passwordControl.touched && !formTemplateVar.valid) {
-  <p class="control-error">Invalid values detected. Please check your input!</p>
+  @if (emailControl.touched && emailControl.dirty && emailControl.invalid) {
+  <p class="control-error">
+    Email address doesn't look right. Please double check it's correct
+  </p>
+  } @if (passwordControl.touched && passwordControl.dirty &&
+  passwordControl.invalid) {
+  <p class="control-error">
+    Password not strong enough. Please try another that is at least 6 characters
+    long
+  </p>
   }
 </form>
