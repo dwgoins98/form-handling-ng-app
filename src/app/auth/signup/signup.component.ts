@@ -1,7 +1,19 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { debounceTime, of } from 'rxjs';
 
+/**
+ * Validator function to check if the confirm password field matches the password field.
+ *
+ * @param control - The form control for the confirm password field.
+ * @returns An object with the validation error if the passwords do not match, otherwise null.
+ */
 function confirmPassword(control: AbstractControl) {
   if (!control.parent) {
     return null;
@@ -30,7 +42,27 @@ export class SignupComponent {
       validators: [Validators.required, Validators.minLength(6)],
     }),
     confirmPasswordControl: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(6), confirmPassword],
+      validators: [
+        Validators.required,
+        Validators.minLength(6),
+        confirmPassword,
+      ],
+    }),
+    firstNameControl: new FormControl('', {
+      validators: [Validators.required],
+    }),
+    lastNameControl: new FormControl('', { validators: [Validators.required] }),
+    streetAddressControl: new FormControl('', {
+      validators: [Validators.required],
+    }),
+    cityControl: new FormControl('', { validators: [Validators.required] }),
+    stateControl: new FormControl('', { validators: [Validators.required] }),
+    zipCodeControl: new FormControl('', { validators: [Validators.required] }),
+    roleControl: new FormControl<
+      'student' | 'teacher' | 'employe' | 'founder' | 'other'
+    >('student', { validators: [Validators.required] }),
+    agreeControl: new FormControl<true | false>(false, {
+      validators: [Validators.required],
     }),
   });
 
@@ -89,6 +121,6 @@ export class SignupComponent {
   }
 
   onReset() {
-    this.form.reset()
+    this.form.reset();
   }
 }
