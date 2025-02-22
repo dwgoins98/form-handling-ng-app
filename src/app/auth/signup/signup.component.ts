@@ -38,29 +38,44 @@ export class SignupComponent {
     emailControl: new FormControl('', {
       validators: [Validators.email, Validators.required],
     }),
-    passwordControl: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(6)],
+
+    passwords: new FormGroup({
+      passwordControl: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(6)],
+      }),
+      confirmPasswordControl: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(6),
+          confirmPassword,
+        ],
+      }),
     }),
-    confirmPasswordControl: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(6),
-        confirmPassword,
-      ],
+
+    name: new FormGroup({
+      firstNameControl: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      lastNameControl: new FormControl('', {
+        validators: [Validators.required],
+      }),
     }),
-    firstNameControl: new FormControl('', {
-      validators: [Validators.required],
+
+    address: new FormGroup({
+      streetAddressControl: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      cityControl: new FormControl('', { validators: [Validators.required] }),
+      stateControl: new FormControl('', { validators: [Validators.required] }),
+      zipCodeControl: new FormControl('', {
+        validators: [Validators.required],
+      }),
     }),
-    lastNameControl: new FormControl('', { validators: [Validators.required] }),
-    streetAddressControl: new FormControl('', {
-      validators: [Validators.required],
-    }),
-    cityControl: new FormControl('', { validators: [Validators.required] }),
-    stateControl: new FormControl('', { validators: [Validators.required] }),
-    zipCodeControl: new FormControl('', { validators: [Validators.required] }),
+
     roleControl: new FormControl<
       'student' | 'teacher' | 'employe' | 'founder' | 'other'
     >('student', { validators: [Validators.required] }),
+
     agreeControl: new FormControl<true | false>(false, {
       validators: [Validators.required],
     }),
@@ -74,19 +89,19 @@ export class SignupComponent {
     );
   }
 
-  public get passwordIsInvalid(): boolean {
+  public get passwordIsInvalid(): boolean | undefined {
     return (
-      this.form.controls.passwordControl.touched &&
-      this.form.controls.passwordControl.dirty &&
-      this.form.controls.passwordControl.invalid
+      this.form.controls.passwords.get('passwordControl')?.touched &&
+      this.form.controls.passwords.get('passwordControl')?.dirty &&
+      this.form.controls.passwords.get('passwordControl')?.invalid
     );
   }
 
-  public get confrimPasswordIsInvalid(): boolean {
+  public get confrimPasswordIsInvalid(): boolean | undefined {
     return (
-      this.form.controls.confirmPasswordControl.touched &&
-      this.form.controls.confirmPasswordControl.dirty &&
-      this.form.controls.confirmPasswordControl.invalid
+      this.form.controls.passwords.get('confirmPasswordControl')?.touched &&
+      this.form.controls.passwords.get('confirmPasswordControl')?.dirty &&
+      this.form.controls.passwords.get('confirmPasswordControl')?.invalid
     );
   }
 
