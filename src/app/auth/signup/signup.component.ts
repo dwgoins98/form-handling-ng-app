@@ -61,6 +61,26 @@ function agreeValidator(control: AbstractControl) {
 export class SignupComponent {
   private destroyRef = inject(DestroyRef);
 
+  /**
+   * FormGroup representing the signup form.
+   * 
+   * Controls:
+   * - `emailControl`: FormControl for the email address with email and required validators.
+   * - `passwords`: FormGroup containing:
+   *   - `passwordControl`: FormControl for the password with required and minLength(6) validators.
+   *   - `confirmPasswordControl`: FormControl for confirming the password with required, minLength(6), and custom confirmPasswordValidator.
+   * - `name`: FormGroup containing:
+   *   - `firstNameControl`: FormControl for the first name with required validator.
+   *   - `lastNameControl`: FormControl for the last name with required validator.
+   * - `address`: FormGroup containing:
+   *   - `streetAddressControl`: FormControl for the street address with required validator.
+   *   - `cityControl`: FormControl for the city with required validator.
+   *   - `stateControl`: FormControl for the state with required validator.
+   *   - `zipCodeControl`: FormControl for the zip code with required validator.
+   * - `roleControl`: FormControl for the role with required and custom roleValidator. Possible values are: '', 'student', 'teacher', 'employe', 'founder', 'other'.
+   * - `sourceControl`: FormArray containing three FormControls for source options, all initialized to false.
+   * - `agreeControl`: FormControl for agreement with required and custom agreeValidator. Possible values are true or false.
+   */
   form = new FormGroup({
     emailControl: new FormControl('', {
       validators: [Validators.email, Validators.required],
@@ -114,6 +134,9 @@ export class SignupComponent {
     }),
   });
 
+/**
+* Getters for the Signup Template's error messaging to make sure all validators are met
+*/
   public get emailIsInvalid(): boolean {
     return (
       this.form.controls.emailControl.touched &&
@@ -199,6 +222,17 @@ export class SignupComponent {
       this.form.controls.agreeControl.invalid
     );
   }
+
+  /**
+   * Initializes the component by loading any saved form data from local storage
+   * and setting up a subscription to save form changes to local storage.
+   *
+   * - If there is saved form data in local storage, it populates the form with the saved email.
+   * - Sets up a subscription to the form's value changes, debounced by 500ms, to save the email to local storage.
+   * - Unsubscribes from the form value changes subscription when the component is destroyed.
+   *
+   * @returns {void}
+   */
   ngOnInit(): void {
     const savedForm = window.localStorage.getItem('saved-login-form');
 
@@ -225,6 +259,13 @@ export class SignupComponent {
     });
   }
 
+  /**
+   * Handles the form submission event.
+   * 
+   * This method marks all form controls as touched to trigger validation messages.
+   * If the form is invalid, it logs 'FORM INVALID' to the console and exits.
+   * Otherwise, it logs the form object to the console.
+   */
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.invalid) {

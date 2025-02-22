@@ -3,6 +3,18 @@
   <h1>Angular Forms</h1>
 </header>
 
+<!-- 
+  This section of the template conditionally renders either the login or signup component 
+  based on the values of `showLoginComponent` and `showSignupComponent`.
+
+  If `showLoginComponent` is true:
+  - The <app-login /> component is displayed.
+  - A navigation footer with a "Sign Up" button is shown, which triggers the `showSignup()` method when clicked.
+
+  If `showSignupComponent` is true:
+  - The <app-signup /> component is displayed.
+  - A navigation footer with a "Login" button is shown, which triggers the `showLogin()` method when clicked.
+-->
 @if (showLoginComponent) {
 <app-login />
 <div class="nav-buttons">
