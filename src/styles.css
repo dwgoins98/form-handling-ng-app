@@ -37,6 +37,42 @@ header h1 {
   color: #2f4444;
 }
 
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.nav-buttons .button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #147b73;
+  color: #d9e2f1;
+  cursor: pointer;
+}
+
+.nav-buttons .button:hover,
+.nav-buttons .button:focus {
+  background-color: #319890;
+}
+
+footer{
+  margin: 3rem auto;
+  padding: 0.5rem;
+  background: linear-gradient(180deg, #253c3c, #1d4949);
+  border-radius: 8px;
+  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+  font-family: "Quicksand", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0.7rem 0;
+  letter-spacing: 0rem;
+  color: #b4b4b4;
+}
+
 form {
   width: 90%;
   max-width: 40rem;

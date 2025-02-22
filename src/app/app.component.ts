@@ -10,4 +10,17 @@ import { SignupComponent } from "./auth/signup/signup.component";
 })
 export class AppComponent {
   title = 'form-handling-ng-app';
+  showLoginComponent: boolean = true
+  showSignupnComponent: boolean = false
+
+
+  showLogin(){
+    this.showLoginComponent = true;
+    this.showSignupnComponent = false
+  }
+
+  showSignup() {
+    this.showLoginComponent = false;
+    this.showSignupnComponent = true
+  }
 }

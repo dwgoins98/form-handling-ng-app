@@ -3,4 +3,16 @@
   <h1>Angular Forms</h1>
 </header>
 
-<app-signup />
+@if (showLoginComponent) {
+<app-login />
+<div class="nav-buttons">
+  <footer>No account?</footer>
+  <button class="button" (click)="showSignup()">Sign Up</button>
+</div>
+} @else if (showSignupnComponent) {
+  <app-signup />
+  <div class="nav-buttons">
+    <footer>Have an account already?</footer>
+  <button class="button" (click)="showLogin()">Login</button>
+  </div>
+}
