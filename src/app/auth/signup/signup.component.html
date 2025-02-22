@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <fieldset  formGroupName="address">
+    <fieldset formGroupName="address">
       <legend>Your Address</legend>
       <div class="control-row">
         <div class="control">
@@ -119,20 +119,38 @@
     </div>
   </div>
 
-  <fieldset>
+  <fieldset formArrayName="sourceControl">
     <legend>How did you find us?</legend>
     <div class="control">
-      <input type="checkbox" id="google" name="acquisition" value="google" />
+      <input
+        type="checkbox"
+        id="google"
+        name="acquisition"
+        value="google"
+        formControlName="0"
+      />
       <label for="google">Google</label>
     </div>
 
     <div class="control">
-      <input type="checkbox" id="friend" name="acquisition" value="friend" />
+      <input
+        type="checkbox"
+        id="friend"
+        name="acquisition"
+        value="friend"
+        formControlName="1"
+      />
       <label for="friend">Referred by friend</label>
     </div>
 
     <div class="control">
-      <input type="checkbox" id="other" name="acquisition" value="other" />
+      <input
+        type="checkbox"
+        id="other"
+        name="acquisition"
+        value="other"
+        formControlName="2"
+      />
       <label for="other">Other</label>
     </div>
   </fieldset>

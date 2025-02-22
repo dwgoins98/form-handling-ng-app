@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -76,6 +77,12 @@ export class SignupComponent {
       'student' | 'teacher' | 'employe' | 'founder' | 'other'
     >('student', { validators: [Validators.required] }),
 
+    sourceControl: new FormArray([
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+    ]),
+
     agreeControl: new FormControl<true | false>(false, {
       validators: [Validators.required],
     }),
@@ -132,6 +139,11 @@ export class SignupComponent {
   }
 
   onSubmit() {
+    this.form.markAllAsTouched();
+    if (this.form.invalid) {
+      console.log('FORM INVALID');
+      return;
+    }
     console.log(this.form);
   }
 
