@@ -1,6 +1,17 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { debounceTime, of } from 'rxjs';
+
+function confirmPassword(control: AbstractControl) {
+  if (!control.parent) {
+    return null;
+  }
+  const password = control.parent.get('passwordControl');
+  if (password && control.value === password.value) {
+    return null;
+  }
+  return { passwordsDoNotMatch: true };
+}
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +29,9 @@ export class SignupComponent {
     passwordControl: new FormControl('', {
       validators: [Validators.required, Validators.minLength(6)],
     }),
+    confirmPasswordControl: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(6), confirmPassword],
+    }),
   });
 
   public get emailIsInvalid(): boolean {
@@ -33,6 +47,14 @@ export class SignupComponent {
       this.form.controls.passwordControl.touched &&
       this.form.controls.passwordControl.dirty &&
       this.form.controls.passwordControl.invalid
+    );
+  }
+
+  public get confrimPasswordIsInvalid(): boolean {
+    return (
+      this.form.controls.confirmPasswordControl.touched &&
+      this.form.controls.confirmPasswordControl.dirty &&
+      this.form.controls.confirmPasswordControl.invalid
     );
   }
 

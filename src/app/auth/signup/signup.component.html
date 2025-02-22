@@ -5,20 +5,31 @@
   <div class="control-row">
     <div class="control">
       <label for="email">Email</label>
-      <input type="email" name="email" id="email" formControlName="emailControl"/>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        formControlName="emailControl"
+      />
     </div>
 
     <div class="control">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" formControlName="passwordControl"/>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        formControlName="passwordControl"
+      />
     </div>
 
     <div class="control">
       <label for="confirm-password">Confirm Password</label>
       <input
-        type="confirm-password"
+        type="password"
         name="confirm-password"
         id="confirm-password"
+        formControlName="confirmPasswordControl"
       />
     </div>
   </div>
@@ -106,15 +117,21 @@
   </div>
 
   <p class="form-actions">
-    <button type="reset" class="button button-flat" (click)="onReset()">Reset</button>
+    <button type="button" class="button button-flat" (click)="onReset()">
+      Reset
+    </button>
     <button type="submit" class="button">Sign up</button>
   </p>
 
   @if (emailIsInvalid) {
-    <p class="control-error">Please enter a valid email address</p>
-    } @if (passwordIsInvalid) {
+  <p class="control-error">Please enter a valid email address</p>
+  } @if (passwordIsInvalid) {
+  <p class="control-error">
+    Please enter a valid password, at least 6 characters long
+  </p>
+  } @if (confrimPasswordIsInvalid) {
     <p class="control-error">
-      Please enter a valid password, at least 6 characters long and include an &
+      Passwords do not match
     </p>
     }
 </form>
