@@ -26,6 +26,32 @@ function confirmPassword(control: AbstractControl) {
   return { passwordsDoNotMatch: true };
 }
 
+/**
+ * Validator function to check if the roleControl field is not empty.
+ *
+ * @param control - The form control for the role field.
+ * @returns An object with the validation error if the role is empty, otherwise null.
+ */
+function roleValidator(control: AbstractControl) {
+  if (control.value === '') {
+    return { roleRequired: true };
+  }
+  return null;
+}
+
+/**
+ * Validator function to check if the agreeControl field is false.
+ *
+ * @param control - The form control for the role field.
+ * @returns An object with the validation error if the role is empty, otherwise null.
+ */
+function agreeValidator(control: AbstractControl) {
+  if (control.value === false) {
+    return { agreeRequired: true };
+  }
+  return null;
+}
+
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule],
@@ -74,8 +100,8 @@ export class SignupComponent {
     }),
 
     roleControl: new FormControl<
-      'student' | 'teacher' | 'employe' | 'founder' | 'other'
-    >('student', { validators: [Validators.required] }),
+      '' | 'student' | 'teacher' | 'employe' | 'founder' | 'other'
+    >('', { validators: [Validators.required, roleValidator] }),
 
     sourceControl: new FormArray([
       new FormControl(false),
@@ -84,7 +110,7 @@ export class SignupComponent {
     ]),
 
     agreeControl: new FormControl<true | false>(false, {
-      validators: [Validators.required],
+      validators: [Validators.required, agreeValidator],
     }),
   });
 
@@ -112,6 +138,67 @@ export class SignupComponent {
     );
   }
 
+  public get firstNameIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.name.get('firstNameControl')?.touched &&
+      this.form.controls.name.get('firstNameControl')?.dirty &&
+      this.form.controls.name.get('firstNameControl')?.invalid
+    );
+  }
+
+  public get lastNameIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.name.get('lastNameControl')?.touched &&
+      this.form.controls.name.get('lastNameControl')?.dirty &&
+      this.form.controls.name.get('lastNameControl')?.invalid
+    );
+  }
+
+  public get streetAddressIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.address.get('streetAddressControl')?.touched &&
+      this.form.controls.address.get('streetAddressControl')?.dirty &&
+      this.form.controls.address.get('streetAddressControl')?.invalid
+    );
+  }
+
+  public get cityIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.address.get('cityControl')?.touched &&
+      this.form.controls.address.get('cityControl')?.dirty &&
+      this.form.controls.address.get('cityControl')?.invalid
+    );
+  }
+
+  public get stateIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.address.get('stateControl')?.touched &&
+      this.form.controls.address.get('stateControl')?.dirty &&
+      this.form.controls.address.get('stateControl')?.invalid
+    );
+  }
+
+  public get zipCodeIsInvalid(): boolean | undefined {
+    return (
+      this.form.controls.address.get('zipCodeControl')?.touched &&
+      this.form.controls.address.get('zipCodeControl')?.dirty &&
+      this.form.controls.address.get('zipCodeControl')?.invalid
+    );
+  }
+
+  public get roleIsInvalid(): boolean {
+    return (
+      this.form.controls.roleControl.touched &&
+      this.form.controls.roleControl.invalid
+    );
+  }
+
+  public get agreeIsInvalid(): boolean {
+    return (
+      this.form.controls.agreeControl.dirty &&
+      this.form.controls.agreeControl.invalid
+    );
+  }
   ngOnInit(): void {
     const savedForm = window.localStorage.getItem('saved-login-form');
 

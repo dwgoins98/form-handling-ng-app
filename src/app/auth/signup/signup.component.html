@@ -11,6 +11,9 @@
         id="email"
         formControlName="emailControl"
       />
+      @if (emailIsInvalid) {
+      <p class="control-error">Please enter a valid email address</p>
+      }
     </div>
 
     <div class="control" formGroupName="passwords">
@@ -21,6 +24,11 @@
         id="password"
         formControlName="passwordControl"
       />
+      @if (passwordIsInvalid) {
+      <p class="control-error">
+        Please enter a valid password, at least 6 characters long
+      </p>
+      }
     </div>
 
     <div class="control" formGroupName="passwords">
@@ -31,6 +39,9 @@
         id="confirm-password"
         formControlName="confirmPasswordControl"
       />
+      @if (confrimPasswordIsInvalid) {
+      <p class="control-error">Passwords do not match</p>
+      }
     </div>
   </div>
 
@@ -45,6 +56,9 @@
           id="first-name"
           formControlName="firstNameControl"
         />
+        @if (firstNameIsInvalid) {
+        <p class="control-error">Enter your First Name</p>
+        }
       </div>
 
       <div class="control" formGroupName="name">
@@ -55,6 +69,9 @@
           id="last-name"
           formControlName="lastNameControl"
         />
+        @if (lastNameIsInvalid) {
+        <p class="control-error">Enter your Last Name</p>
+        }
       </div>
     </div>
 
@@ -69,6 +86,9 @@
             id="street-address"
             formControlName="streetAddressControl"
           />
+          @if (streetAddressIsInvalid) {
+          <p class="control-error">Enter a valid street address</p>
+          }
         </div>
 
         <div class="control">
@@ -79,6 +99,9 @@
             id="city"
             formControlName="cityControl"
           />
+          @if (cityIsInvalid) {
+          <p class="control-error">Enter a valid city</p>
+          }
         </div>
 
         <div class="control">
@@ -89,6 +112,9 @@
             id="state"
             formControlName="stateControl"
           />
+          @if (stateIsInvalid) {
+          <p class="control-error">Enter a valid state</p>
+          }
         </div>
 
         <div class="control">
@@ -99,6 +125,9 @@
             id="zip-code"
             formControlName="zipCodeControl"
           />
+          @if (zipCodeIsInvalid) {
+          <p class="control-error">Enter a zip code</p>
+          }
         </div>
       </div>
     </fieldset>
@@ -116,6 +145,9 @@
         <option value="founder">Founder</option>
         <option value="other">Other</option>
       </select>
+      @if (roleIsInvalid) {
+      <p class="control-error">Please pick a role</p>
+      }
     </div>
   </div>
 
@@ -165,6 +197,9 @@
           formControlName="agreeControl"
         />
         I agree to the terms and conditions
+        @if (agreeIsInvalid) {
+        <p class="control-error">Please agree to the terms and conditions</p>
+        }
       </label>
     </div>
   </div>
@@ -175,14 +210,4 @@
     </button>
     <button type="submit" class="button">Sign up</button>
   </p>
-
-  @if (emailIsInvalid) {
-  <p class="control-error">Please enter a valid email address</p>
-  } @if (passwordIsInvalid) {
-  <p class="control-error">
-    Please enter a valid password, at least 6 characters long
-  </p>
-  } @if (confrimPasswordIsInvalid) {
-  <p class="control-error">Passwords do not match</p>
-  }
 </form>
