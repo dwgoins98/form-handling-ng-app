@@ -173,10 +173,12 @@ hr {
   color: #869999;
 }
 
+[formgroupname].ng-invalid.ng-touched.ng-dirty label,
 .control:has(.ng-invalid.ng-touched.ng-dirty) label {
   color: #f58069;
 }
 
+[formgroupname].ng-invalid.ng-touched.ng-dirty input,
 input.ng-invalid.ng-touched.ng-dirty {
   background-color: #f6a08e;
   border-color: #ff1313;

@@ -15,7 +15,7 @@ import { debounceTime, of } from 'rxjs';
  * @param control - The form control for the confirm password field.
  * @returns An object with the validation error if the passwords do not match, otherwise null.
  */
-function confirmPassword(control: AbstractControl) {
+function confirmPasswordValidator(control: AbstractControl) {
   if (!control.parent) {
     return null;
   }
@@ -74,7 +74,7 @@ export class SignupComponent {
         validators: [
           Validators.required,
           Validators.minLength(6),
-          confirmPassword,
+          confirmPasswordValidator,
         ],
       }),
     }),
@@ -132,7 +132,7 @@ export class SignupComponent {
 
   public get confrimPasswordIsInvalid(): boolean | undefined {
     return (
-      this.form.controls.passwords.get('confirmPasswordControl')?.touched &&
+      // this.form.controls.passwords.get('confirmPasswordControl')?.touched &&
       this.form.controls.passwords.get('confirmPasswordControl')?.dirty &&
       this.form.controls.passwords.get('confirmPasswordControl')?.invalid
     );
